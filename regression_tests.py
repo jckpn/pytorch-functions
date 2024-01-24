@@ -1,4 +1,5 @@
 # tests for regression models (MAE, MAE %, plot predictions vs actual, etc.)
+# TODO: option to use specific device
 
 
 import matplotlib.pyplot as plt

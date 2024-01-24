@@ -1,7 +1,10 @@
 # common tests for classification networks: accuracy, confusion matrix, etc.
+# TODO: option to use specific device
+
 
 import torch
 import matplotlib.pyplot as plt
+
 
 def classification_metrics(model, test_loader, print_results=True):
     model.eval()

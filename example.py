@@ -1,7 +1,7 @@
 import torch
 from torchvision import transforms, datasets
 from train_model_patience import train_model
-from classification_tests import test_class_accuracy
+from classification_tests import classification_metrics
 import networks
 
 
@@ -46,7 +46,7 @@ device = torch.device("mps") # replace with "cuda" or "cpu" as needed
 model = train_model(model, train_loader, optim, loss_fn, val_loader,
                     max_epochs=10, device=device)
 
-test_class_accuracy(model, val_loader, device=device)
+classification_metrics(model, val_loader)
 
 # IDEA: nn 1 to check face is facing the right way
 #       nn 2 to detect landmark points on front of head
