@@ -1,7 +1,6 @@
 import torch
 from torchvision import transforms, datasets
 from train_model_patience import train_model
-from classification_tests import classification_metrics
 import networks
 
 
@@ -27,16 +26,13 @@ val_loader = torch.utils.data.DataLoader(
         train=False,
         download=True,
         transform=preprocess),
-    batch_size=1,
+    batch_size=16,
     shuffle=False)
 
 
 model = networks.LeNet(num_classes=10)
 # model = torch.hub.load('pytorch/vision:v0.10.0', 'mobilenet_v2',
 #                     pretrained=True)
-
-# test before training for comparison
-classification_metrics(model, val_loader)
 
 
 optim = torch.optim.Adam(model.parameters(), lr=0.001)
@@ -47,7 +43,7 @@ device = torch.device("mps") # replace with "cuda" or "cpu" as needed
 model = train_model(model, train_loader, optim, loss_fn, val_loader,
                     max_epochs=10, device=device)
 
-classification_metrics(model, val_loader)
+# classification_metrics(model, val_loader)
 
 # IDEA: nn 1 to check face is facing the right way
 #       nn 2 to detect landmark points on front of head
