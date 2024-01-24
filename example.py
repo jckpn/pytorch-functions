@@ -5,14 +5,10 @@ from classification_tests import classification_metrics
 import networks
 
 
-
-# https://pytorch.org/hub/pytorch_vision_mobilenet_v2/
+# preprocess data transformation - networks usually expect certain input
 preprocess = transforms.Compose([
-    transforms.Resize(256),
-    transforms.CenterCrop(224),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                            std=[0.229, 0.224, 0.225]),
+    transforms.Grayscale(),
+    transforms.Resize(28),
 ])
 
 train_loader = torch.utils.data.DataLoader(
@@ -35,8 +31,12 @@ val_loader = torch.utils.data.DataLoader(
 
 
 model = networks.LeNet(num_classes=10)
-# model = torch.hub.load('pytorch/vision:v0.10.0', 'mobilenet_v2', 
+# model = torch.hub.load('pytorch/vision:v0.10.0', 'mobilenet_v2',
 #                     pretrained=True)
+
+# test before training for comparison
+classification_metrics(model, val_loader)
+
 
 optim = torch.optim.Adam(model.parameters(), lr=0.001)
 loss_fn = torch.nn.CrossEntropyLoss()
