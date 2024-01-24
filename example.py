@@ -8,7 +8,8 @@ import networks
 # preprocess data transformation - networks usually expect certain input
 preprocess = transforms.Compose([
     transforms.Grayscale(),
-    transforms.Resize(28),
+    transforms.Resize(32),
+    transforms.ToTensor(),
 ])
 
 train_loader = torch.utils.data.DataLoader(
@@ -17,7 +18,7 @@ train_loader = torch.utils.data.DataLoader(
         train=True,
         download=True,
         transform=preprocess),
-    batch_size=64,
+    batch_size=16,
     shuffle=True)
 
 val_loader = torch.utils.data.DataLoader(
@@ -26,7 +27,7 @@ val_loader = torch.utils.data.DataLoader(
         train=False,
         download=True,
         transform=preprocess),
-    batch_size=64,
+    batch_size=1,
     shuffle=False)
 
 
