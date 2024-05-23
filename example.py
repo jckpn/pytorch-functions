@@ -44,7 +44,3 @@ model = train_model(model, train_loader, optim, loss_fn, val_loader,
                     max_epochs=10, device=device)
 
 # classification_metrics(model, val_loader)
-
-# IDEA: nn 1 to check face is facing the right way
-#       nn 2 to detect landmark points on front of head
-#       nn 3 to predict extra landmark points, using bald heads to train
